@@ -1,0 +1,161 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senha     String
+  perfil    Perfil   @default(ALUNO)
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  casosComoAluno     CasoJuridico[] @relation("AlunoResponsavel")
+  casosComoProfessor CasoJuridico[] @relation("ProfessorOrientador")
+
+  historicos HistoricoCaso[]
+
+  atendimentos Atendimento[] @relation("ResponsavelAtendimento")
+
+  // Assistidos cadastrados por este usuário.
+  assistidosCadastrados Assistido[] @relation("UsuarioCadastroAssistido")
+}
+
+enum Perfil {
+  ADMIN
+  PROFESSOR
+  ALUNO
+}
+
+model Assistido {
+  id        String   @id @default(uuid())
+  nome      String
+  cpf       String   @unique
+  telefone  String
+  email     String?
+  endereco  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  atendimentos Atendimento[]
+  casos        CasoJuridico[]
+
+  // Identifica quem cadastrou o assistido.
+  cadastradoPorId String?
+  cadastradoPor   Usuario? @relation("UsuarioCadastroAssistido", fields: [cadastradoPorId], references: [id])
+}
+
+model Atendimento {
+  id          String   @id @default(uuid())
+  descricao   String   @db.Text
+  data        DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  assistidoId String
+  assistido   Assistido @relation(fields: [assistidoId], references: [id])
+
+  casoId      String?
+  caso        CasoJuridico? @relation(fields: [casoId], references: [id])
+
+  // Usuário responsável pelo atendimento
+  responsavelId String?
+  responsavel   Usuario? @relation("ResponsavelAtendimento", fields: [responsavelId], references: [id])
+}
+
+model CasoJuridico {
+  id          String     @id @default(uuid())
+  titulo      String
+  descricao   String     @db.Text
+  situacao    SituacaoCaso @default(ABERTO)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  assistidoId String
+  assistido   Assistido  @relation(fields: [assistidoId], references: [id])
+
+  alunoId     String?
+  aluno       Usuario? @relation("AlunoResponsavel", fields: [alunoId], references: [id])
+
+  professorId String?
+  professor   Usuario? @relation("ProfessorOrientador", fields: [professorId], references: [id])
+
+  atividades Atividade[]
+
+  prazos Prazo[]
+
+  documentos Documento[]
+
+  historicos HistoricoCaso[]
+
+  atendimentos Atendimento[]
+}
+
+enum SituacaoCaso {
+  ABERTO
+  EM_ANDAMENTO
+  ENCERRADO
+}
+
+model Atividade {
+  id          String           @id @default(uuid())
+  titulo      String
+  descricao   String?          @db.Text
+  situacao    SituacaoAtividade @default(PENDENTE)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  casoId      String
+  caso        CasoJuridico     @relation(fields: [casoId], references: [id])
+}
+
+enum SituacaoAtividade {
+  PENDENTE
+  EM_ANDAMENTO
+  CONCLUIDA
+}
+
+model Prazo {
+  id          String       @id @default(uuid())
+  titulo      String
+  descricao   String?      @db.Text
+  dataLimite  DateTime
+  concluido   Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  casoId      String
+  caso        CasoJuridico @relation(fields: [casoId], references: [id])
+}
+
+model Documento {
+  id          String       @id @default(uuid())
+  nome        String
+  descricao   String?      @db.Text
+  caminho     String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  casoId      String
+  caso        CasoJuridico @relation(fields: [casoId], references: [id])
+}
+
+model HistoricoCaso {
+  id        String       @id @default(uuid())
+  descricao String       @db.Text
+  createdAt DateTime     @default(now())
+
+  casoId    String
+  caso      CasoJuridico @relation(fields: [casoId], references: [id])
+
+  usuarioId String?
+  usuario   Usuario?     @relation(fields: [usuarioId], references: [id])
+}

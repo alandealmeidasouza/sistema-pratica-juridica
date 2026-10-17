@@ -134,3 +134,16 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Prisma Client gerado automaticamente
+backend/src/generated/
+
+# Configuracoes locais de ferramentas de IA
+backend/.agents/
+backend/.claude/
+backend/.cursor/
+backend/.devin/
+
+# Arquivos de ambiente
+.env.*
+!.env.example
