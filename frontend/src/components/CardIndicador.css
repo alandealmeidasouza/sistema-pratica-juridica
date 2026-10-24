@@ -1,0 +1,83 @@
+
+/* Cartão de indicador */
+.card-indicador {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  min-width: 0;
+  padding: 25px;
+
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  box-shadow: 0 4px 12px rgba(11, 37, 89, 0.06);
+
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito ao passar o mouse */
+.card-indicador:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(11, 37, 89, 0.12);
+}
+
+/* Informações do cartão */
+.card-indicador-informacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.card-indicador-informacoes p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.card-indicador-informacoes strong {
+  color: #0b2559;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* Área do ícone */
+.card-indicador-icone {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  background-color: #dbeafe;
+  color: #155eef;
+  border-radius: 12px;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+  .card-indicador {
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .card-indicador-informacoes strong {
+    font-size: 1.6rem;
+  }
+
+  .card-indicador-icone {
+    width: 45px;
+    height: 45px;
+  }
+
+  .card-indicador-icone svg {
+    width: 22px;
+    height: 22px;
+  }
+}

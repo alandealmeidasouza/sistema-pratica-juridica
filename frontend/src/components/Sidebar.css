@@ -1,0 +1,106 @@
+/* Menu lateral */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #0b2559;
+  color: #ffffff;
+}
+
+/* Identidade do sistema */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 28px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-logo span {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Área dos itens do menu */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 20px 12px;
+  flex: 1;
+}
+
+/* Botões do menu */
+.sidebar .menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+
+  padding: 14px 16px;
+  border: none;
+  border-radius: 8px;
+
+  background-color: transparent;
+  color: #dbeafe;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Efeito ao passar o mouse */
+.sidebar .menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* Item selecionado */
+.sidebar .menu-item.ativo {
+  background-color: #155eef;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Rodapé do menu */
+.sidebar-rodape {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Adaptação para tablets e celulares */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 72px;
+    min-width: 72px;
+    min-height: calc(100vh - 70px);
+  }
+
+  .sidebar-logo {
+    justify-content: center;
+    padding: 24px 10px;
+  }
+
+  .sidebar-logo span {
+    display: none;
+  }
+
+  .sidebar .menu-item {
+    justify-content: center;
+    padding: 14px;
+  }
+
+  .sidebar .menu-item span {
+    display: none;
+  }
+}

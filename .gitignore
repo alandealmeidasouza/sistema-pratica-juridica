@@ -147,3 +147,6 @@ backend/.devin/
 # Arquivos de ambiente
 .env.*
 !.env.example
+
+# Documentos enviados ao sistema jurídico
+backend/uploads/

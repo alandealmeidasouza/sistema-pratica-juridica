@@ -1,0 +1,242 @@
+
+.assistidos-pagina {
+  width: 100%;
+}
+
+.assistidos-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.assistidos-cabecalho h1 {
+  color: #0d285c;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.assistidos-cabecalho p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.assistidos-botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: #155eef;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.assistidos-botao:hover {
+  background-color: #104ac0;
+}
+
+.assistidos-lista {
+  background-color: white;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.assistidos-lista h2 {
+  color: #0d285c;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.assistidos-lista p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .assistidos-cabecalho {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .assistidos-botao {
+    width: 100%;
+  }
+
+  .assistidos-lista {
+    padding: 18px;
+  }
+}
+
+/* Container da tabela */
+.assistidos-tabela-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* Tabela */
+.assistidos-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 650px;
+}
+
+/* Cabeçalho */
+.assistidos-tabela thead {
+  background-color: #f1f5f9;
+}
+
+.assistidos-tabela th {
+  padding: 16px;
+  color: #0d2555;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid #dce4ee;
+}
+
+/* Células */
+.assistidos-tabela td {
+  padding: 16px;
+  color: #475569;
+  font-size: 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Destaque do nome */
+.assistidos-tabela td:first-child {
+  color: #0d2555;
+  font-weight: 600;
+}
+
+/* Efeito ao passar o mouse */
+.assistidos-tabela tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Última linha */
+.assistidos-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .assistidos-tabela-container {
+    margin-top: 15px;
+  }
+
+  .assistidos-tabela th,
+  .assistidos-tabela td {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+/* Formulário de cadastro de assistidos */
+
+.assistidos-formulario {
+  background-color: #ffffff;
+  border: 1px solid #dce4ef;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.assistidos-formulario h2 {
+  color: #0d2758;
+  font-size: 20px;
+  margin-bottom: 22px;
+}
+
+.assistidos-formulario form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.assistidos-formulario form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.assistidos-formulario label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0d2758;
+}
+
+.assistidos-formulario input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.assistidos-formulario input:focus {
+  border-color: #155eef;
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.12);
+}
+
+.assistidos-formulario-acoes {
+  grid-column: 1 / -1;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.assistidos-formulario-acoes button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.assistidos-formulario-acoes button:first-child {
+  background-color: #e8edf5;
+  color: #0d2758;
+}
+
+.assistidos-formulario-acoes button:last-child {
+  background-color: #155eef;
+  color: white;
+}
+
+.assistidos-formulario-acoes button:hover {
+  filter: brightness(0.95);
+}
+
+/* Responsividade para celulares */
+
+@media (max-width: 600px) {
+  .assistidos-formulario {
+    padding: 18px;
+  }
+
+  .assistidos-formulario form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .assistidos-formulario-acoes {
+    flex-direction: column !important;
+  }
+
+  .assistidos-formulario-acoes button {
+    width: 100%;
+  }
+}
