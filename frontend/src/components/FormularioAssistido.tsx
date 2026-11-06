@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { cadastrarAssistido } from "../services/assistidosService";
+import {
+  cadastrarAssistido,
+  type Assistido,
+} from "../services/assistidosService";
 
 type Props = {
   aoCancelar: () => void;
-   aoCadastrar: () => void;
+  aoCadastrar: () => void;
+  assistido?: Assistido | null;
 };
 
-function FormularioAssistido({ aoCancelar, aoCadastrar }: Props) {
-  const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [endereco, setEndereco] = useState("");
+function FormularioAssistido({ aoCancelar, aoCadastrar, assistido, }: Props) {
+  const [nome, setNome] = useState(assistido?.nome ?? "");
+  const [cpf, setCpf] = useState(assistido?.cpf ?? "");
+  const [telefone, setTelefone] = useState(assistido?.telefone ?? "");
+  const [email, setEmail] = useState(assistido?.email ?? "");
+  const [endereco, setEndereco] = useState(assistido?.endereco ?? "");
 
   const { token } = useAuth();
 

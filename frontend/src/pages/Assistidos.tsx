@@ -1,6 +1,6 @@
 import FormularioAssistido from "../components/FormularioAssistido";
 import { useEffect, useState } from "react";
-import { Plus } from "lucide-react";
+import { Plus, Pencil } from "lucide-react";
 
 import { useAuth } from "../contexts/AuthContext";
 
@@ -18,6 +18,8 @@ function Assistidos() {
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [assistidoSelecionado, setAssistidoSelecionado] =
+  useState<Assistido | null>(null);
 
   useEffect(() => {
     if (!token) {
@@ -64,6 +66,11 @@ function Assistidos() {
   }
 }
 
+function handleEditarAssistido(assistido: Assistido) {
+  setAssistidoSelecionado(assistido);
+  setMostrarFormulario(true);
+}
+
   return (
     <div className="assistidos-pagina">
       <div className="assistidos-cabecalho">
@@ -78,7 +85,10 @@ function Assistidos() {
         <button
           type="button"
           className="assistidos-botao"
-          onClick={() => setMostrarFormulario(true)}
+          onClick={() => {
+            setAssistidoSelecionado(null);
+            setMostrarFormulario(true);
+          }}
         >
           <Plus size={18} />
           Novo Assistido
@@ -87,6 +97,8 @@ function Assistidos() {
 
       {mostrarFormulario && (
         <FormularioAssistido
+          key={assistidoSelecionado?.id ?? "novo"}
+          assistido={assistidoSelecionado}
           aoCancelar={() => setMostrarFormulario(false)}
           aoCadastrar={handleAssistidoCadastrado}
         />
@@ -113,6 +125,7 @@ function Assistidos() {
                 <th>CPF</th>
                 <th>Telefone</th>
                 <th>E-mail</th>
+                <th>Ações</th>
               </tr>
             </thead>
 
@@ -123,6 +136,18 @@ function Assistidos() {
                   <td>{assistido.cpf}</td>
                   <td>{assistido.telefone}</td>
                   <td>{assistido.email || "Não informado"}</td>
+
+                  <td>
+                    <button
+                      type="button"
+                      className="assistidos-botao-editar"
+                      aria-label={`Editar ${assistido.nome}`}
+                      onClick={() => handleEditarAssistido(assistido)}
+                    >
+                      <Pencil size={16} />
+                      Editar
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

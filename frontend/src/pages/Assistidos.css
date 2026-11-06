@@ -240,3 +240,33 @@
     width: 100%;
   }
 }
+
+.assistidos-botao-editar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 8px 12px;
+
+  background-color: #eff6ff;
+  color: #1d4ed8;
+
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.assistidos-botao-editar:hover {
+  background-color: #dbeafe;
+}
+
+.assistidos-botao-editar:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
