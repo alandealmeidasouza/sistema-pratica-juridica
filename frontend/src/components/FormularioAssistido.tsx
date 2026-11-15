@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import {
   cadastrarAssistido,
+  atualizarAssistido,
   type Assistido,
 } from "../services/assistidosService";
 
@@ -35,17 +36,25 @@ function FormularioAssistido({ aoCancelar, aoCadastrar, assistido, }: Props) {
   setSalvando(true);
 
   try {
-    await cadastrarAssistido(token, {
-      nome: nome.trim(),
-      cpf: cpf.replace(/\D/g, ""),
-      telefone: telefone.trim(),
-      email: email.trim(),
-      endereco: endereco.trim(),
-    });
+    const dados = {
+    nome: nome.trim(),
+    cpf: cpf.replace(/\D/g, ""),
+    telefone: telefone.trim(),
+    email: email.trim(),
+    endereco: endereco.trim(),
+  };
 
+  if (assistido) {
+    await atualizarAssistido(token, assistido.id, dados);
+    alert("Assistido atualizado com sucesso!");
+  } else {
+    await cadastrarAssistido(token, dados);
     alert("Assistido cadastrado com sucesso!");
+  }
+
     aoCadastrar();
     aoCancelar();
+    
   } catch (error) {
     if (error instanceof Error) {
       setErro(error.message);
@@ -59,7 +68,9 @@ function FormularioAssistido({ aoCancelar, aoCadastrar, assistido, }: Props) {
 
   return (
     <section className="assistidos-formulario">
-      <h2>Cadastrar Novo Assistido</h2>
+      <h2>
+        {assistido ? "Editar Assistido" : "Cadastrar Novo Assistido"}
+      </h2>
 
       <form onSubmit={handleSubmit}>
         <div>
@@ -128,7 +139,13 @@ function FormularioAssistido({ aoCancelar, aoCadastrar, assistido, }: Props) {
           </button>
 
           <button type="submit" disabled={salvando}>
-            {salvando ? "Cadastrando..." : "Cadastrar Assistido"}
+             {salvando
+              ? assistido
+                ? "Salvando..."
+                : "Cadastrando..."
+              : assistido
+                ? "Salvar Alterações"
+                : "Cadastrar Assistido"}
           </button>
         </div>
       </form>

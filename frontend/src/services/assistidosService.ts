@@ -68,3 +68,56 @@ export async function cadastrarAssistido(
 
   return resultado;
 }
+
+export async function atualizarAssistido(
+  token: string,
+  id: string,
+  dados: DadosNovoAssistido
+) {
+  const resposta = await fetch(
+    `http://localhost:3000/assistidos/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dados),
+    }
+  );
+
+  const resultado = await resposta.json();
+
+  if (!resposta.ok) {
+    throw new Error(
+      resultado.mensagem || "Não foi possível atualizar o assistido."
+    );
+  }
+
+  return resultado;
+}
+
+export async function excluirAssistido(
+  token: string,
+  id: string
+) {
+  const resposta = await fetch(
+    `http://localhost:3000/assistidos/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  const resultado = await resposta.json();
+
+  if (!resposta.ok) {
+    throw new Error(
+      resultado.mensagem || "Não foi possível excluir o assistido."
+    );
+  }
+
+  return resultado;
+}

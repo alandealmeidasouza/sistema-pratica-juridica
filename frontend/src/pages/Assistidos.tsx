@@ -1,18 +1,19 @@
 import FormularioAssistido from "../components/FormularioAssistido";
 import { useEffect, useState } from "react";
-import { Plus, Pencil } from "lucide-react";
+import { Plus, Pencil, Trash2 } from "lucide-react";
 
 import { useAuth } from "../contexts/AuthContext";
 
 import {
   buscarAssistidos,
+  excluirAssistido,
   type Assistido,
 } from "../services/assistidosService";
 
 import "./Assistidos.css";
 
 function Assistidos() {
-  const { token } = useAuth();
+  const { token, usuario } = useAuth();
 
   const [assistidos, setAssistidos] = useState<Assistido[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -69,6 +70,36 @@ function Assistidos() {
 function handleEditarAssistido(assistido: Assistido) {
   setAssistidoSelecionado(assistido);
   setMostrarFormulario(true);
+}
+
+async function handleExcluirAssistido(assistido: Assistido) {
+  if (!token || usuario?.perfil !== "ADMIN") {
+    return;
+  }
+
+  const confirmou = window.confirm(
+    `Tem certeza que deseja excluir o assistido ${assistido.nome}?`
+  );
+
+  if (!confirmou) {
+    return;
+  }
+
+  try {
+    await excluirAssistido(token, assistido.id);
+
+    alert("Assistido excluído com sucesso!");
+
+    const dados = await buscarAssistidos(token);
+    setAssistidos(dados);
+    setErro("");
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert("Não foi possível excluir o assistido.");
+    }
+  }
 }
 
   return (
@@ -147,6 +178,18 @@ function handleEditarAssistido(assistido: Assistido) {
                       <Pencil size={16} />
                       Editar
                     </button>
+
+                    {usuario?.perfil === "ADMIN" && (
+                      <button
+                        type="button"
+                        className="assistidos-botao-excluir"
+                        aria-label={`Excluir ${assistido.nome}`}
+                        onClick={() => handleExcluirAssistido(assistido)}
+                      >
+                        <Trash2 size={16} />
+                        Excluir
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
