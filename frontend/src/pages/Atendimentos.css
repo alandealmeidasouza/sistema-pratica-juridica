@@ -1,0 +1,85 @@
+
+.atendimentos-pagina {
+  padding: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+.atendimentos-pagina h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.atendimentos-pagina > p {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.atendimentos-lista {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.atendimentos-lista h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.atendimentos-tabela-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.atendimentos-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.atendimentos-tabela th,
+.atendimentos-tabela td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.atendimentos-tabela th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.atendimentos-tabela td {
+  color: #334155;
+}
+
+.atendimentos-tabela tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+@media (max-width: 600px) {
+  .atendimentos-pagina {
+    padding: 16px;
+  }
+
+  .atendimentos-pagina h1 {
+    font-size: 24px;
+  }
+
+  .atendimentos-lista {
+    padding: 14px;
+  }
+
+  .atendimentos-tabela {
+    min-width: 850px;
+  }
+}

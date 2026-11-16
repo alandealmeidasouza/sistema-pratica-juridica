@@ -25,15 +25,33 @@ const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [usuario, setUsuario] = useState<Usuario | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  
+  const [usuario, setUsuario] = useState<Usuario | null>(() => {
+    try {
+      const usuarioSalvo = sessionStorage.getItem("usuario");
+
+      return usuarioSalvo ? JSON.parse(usuarioSalvo) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const [token, setToken] = useState<string | null>(() => {
+    return sessionStorage.getItem("token");
+  });
 
   function entrar(usuario: Usuario, token: string) {
+    sessionStorage.setItem("usuario", JSON.stringify(usuario));
+    sessionStorage.setItem("token", token);
+
     setUsuario(usuario);
     setToken(token);
   }
 
   function sair() {
+    sessionStorage.removeItem("usuario");
+    sessionStorage.removeItem("token");
+
     setUsuario(null);
     setToken(null);
   }

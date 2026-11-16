@@ -46,10 +46,16 @@ function Sidebar() {
           <span>Assistidos</span>
         </NavLink>
 
-        <button type="button" className="menu-item">
+        
+        <NavLink
+          to="/atendimentos"
+          className={({ isActive }) =>
+            `menu-item ${isActive ? "ativo" : ""}`
+          }
+        >
           <ClipboardList size={20} />
           <span>Atendimentos</span>
-        </button>
+        </NavLink>
 
         <button type="button" className="menu-item">
           <Scale size={20} />
