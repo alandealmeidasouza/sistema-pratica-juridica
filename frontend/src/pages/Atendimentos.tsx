@@ -1,6 +1,7 @@
 import "./Atendimentos.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import FormularioAtendimento from "../components/FormularioAtendimento";
 
 import {
   buscarAtendimentos,
@@ -9,6 +10,10 @@ import {
 
 function Atendimentos() {
   const { token } = useAuth();
+
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [atendimentoEmEdicao, setAtendimentoEmEdicao] =
+  useState<Atendimento | null>(null);
 
   const [atendimentos, setAtendimentos] = useState<Atendimento[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -47,6 +52,11 @@ function Atendimentos() {
     };
   }, [token]);
 
+  function iniciarEdicao(atendimento: Atendimento) {
+  setAtendimentoEmEdicao(atendimento);
+  setMostrarFormulario(true);
+  }
+
   return (
     <div className="atendimentos-pagina">
       <h1>Atendimentos</h1>
@@ -54,6 +64,39 @@ function Atendimentos() {
       <p>
         Consulte os atendimentos realizados na Prática Jurídica.
       </p>
+
+      <button
+        type="button"
+        className="atendimentos-botao-novo"
+        onClick={() => {
+          setAtendimentoEmEdicao(null);
+          setMostrarFormulario(true);
+        }}
+      >
+        + Novo Atendimento
+      </button>
+      
+      {mostrarFormulario && (
+        <FormularioAtendimento
+          key={atendimentoEmEdicao?.id ?? "novo"}
+          atendimento={atendimentoEmEdicao}
+          aoCancelar={() => {
+            setMostrarFormulario(false);
+            setAtendimentoEmEdicao(null);
+          }}
+          aoCadastrar={async () => {
+            if (!token) return;
+
+            try {
+              const dados = await buscarAtendimentos(token);
+              setAtendimentos(dados);
+              setErro("");
+            } catch {
+              setErro("Não foi possível atualizar a lista de atendimentos.");
+            }
+          }}
+        />
+      )}
 
       <section className="atendimentos-lista">
         <h2>Lista de Atendimentos</h2>
@@ -76,6 +119,7 @@ function Atendimentos() {
                   <th>Descrição</th>
                   <th>Caso Jurídico</th>
                   <th>Responsável</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
 
@@ -93,6 +137,15 @@ function Atendimentos() {
                       {atendimento.caso?.titulo || "Atendimento inicial"}
                     </td>
                     <td>{atendimento.responsavel?.nome ?? "Não informado"}</td>
+                    <td>
+                      <button
+                        type="button"
+                        className="atendimentos-botao-editar"
+                        onClick={() => iniciarEdicao(atendimento)}
+                      >
+                        Editar
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -83,3 +83,139 @@
     min-width: 850px;
   }
 }
+
+/* Formulário de atendimento */
+
+.formulario-atendimento {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 24px;
+  margin: 20px 0;
+}
+
+.formulario-atendimento h2 {
+  font-size: 20px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.formulario-atendimento label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.formulario-atendimento select,
+.formulario-atendimento textarea,
+.formulario-atendimento input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #334155;
+  box-sizing: border-box;
+}
+
+.formulario-atendimento textarea {
+  resize: vertical;
+}
+
+.formulario-atendimento-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.formulario-atendimento-acoes button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+}
+
+.formulario-atendimento-acoes button[type="submit"] {
+  background-color: #155eef;
+  color: #ffffff;
+  border-color: #155eef;
+}
+
+.formulario-atendimento-acoes button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .formulario-atendimento {
+    padding: 16px;
+  }
+
+  .formulario-atendimento-acoes {
+    flex-direction: column;
+  }
+
+  .formulario-atendimento-acoes button {
+    width: 100%;
+  }
+}
+
+/* Botão Novo Atendimento */
+
+.atendimentos-botao-novo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #155eef;
+  color: #ffffff;
+  border: 1px solid #155eef;
+  border-radius: 6px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.atendimentos-botao-novo:hover {
+  background-color: #1048c7;
+}
+
+.atendimentos-botao-novo:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .atendimentos-botao-novo {
+    width: 100%;
+  }
+}
+
+.atendimentos-botao-editar {
+  background-color: #ffffff;
+  color: #155eef;
+  border: 1px solid #155eef;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.atendimentos-botao-editar:hover {
+  background-color: #eff6ff;
+}
+
+.atendimentos-botao-editar:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}

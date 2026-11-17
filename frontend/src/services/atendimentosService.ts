@@ -5,7 +5,7 @@ export type Atendimento = {
   data: string;
   assistidoId: string;
   casoId: string | null;
-  responsavelId: string;
+  responsavelId: string | null;
 
   assistido: {
     id: string;
@@ -18,10 +18,10 @@ export type Atendimento = {
   } | null;
 
   responsavel: {
-    id: string;
-    nome: string;
-    perfil: string;
-  };
+  id: string;
+  nome: string;
+  perfil: string;
+  } | null;
 };
 
 export async function buscarAtendimentos(
@@ -76,6 +76,41 @@ export async function cadastrarAtendimento(
     throw new Error(
       resultado.mensagem ||
         "Não foi possível cadastrar o atendimento."
+    );
+  }
+
+  return resultado.atendimento;
+}
+
+
+export type DadosEdicaoAtendimento = {
+  descricao?: string;
+  casoId?: string;
+};
+
+export async function atualizarAtendimento(
+  token: string,
+  id: string,
+  dados: DadosEdicaoAtendimento
+) {
+  const resposta = await fetch(
+    `http://localhost:3000/atendimentos/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dados),
+    }
+  );
+
+  const resultado = await resposta.json();
+
+  if (!resposta.ok) {
+    throw new Error(
+      resultado.mensagem ||
+        "Não foi possível atualizar o atendimento."
     );
   }
 
