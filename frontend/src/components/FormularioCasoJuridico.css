@@ -77,3 +77,17 @@
   border-radius: 6px;
   font-size: 14px;
 }
+
+.formulario-caso-acoes button[type="button"].botao-salvar-caso {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.formulario-caso-acoes button[type="button"].botao-salvar-caso:hover {
+  background-color: #1d4ed8;
+}
+
+.formulario-caso-acoes button[type="button"].botao-salvar-caso:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

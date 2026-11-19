@@ -118,3 +118,76 @@
   outline: 3px solid #93c5fd;
   outline-offset: 2px;
 }
+
+.botao-editar-caso {
+  padding: 8px 14px;
+  background-color: #f59e0b;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.botao-editar-caso:hover {
+  background-color: #d97706;
+}
+
+.botao-editar-caso:focus-visible {
+  outline: 3px solid #fcd34d;
+  outline-offset: 2px;
+}
+
+/* Espaçamento entre os botões da tabela */
+.casos-juridicos-tabela td button {
+  margin-right: 8px;
+  margin-bottom: 6px;
+}
+
+/* Botão de atribuir responsáveis */
+.botao-atribuir-responsaveis {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.botao-atribuir-responsaveis:hover {
+  background-color: #1d4ed8;
+}
+
+/* Organização dos botões da coluna Ações */
+.casos-juridicos-tabela td:last-child {
+  min-width: 260px;
+  white-space: nowrap;
+}
+
+.casos-juridicos-tabela td:last-child button {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 768px) {
+  .casos-juridicos-tabela td:last-child {
+    min-width: 150px;
+    white-space: normal;
+  }
+
+  .casos-juridicos-tabela td:last-child button {
+    display: block;
+    width: 100%;
+    margin: 0 0 8px 0;
+    box-sizing: border-box;
+  }
+
+  .casos-juridicos-tabela td:last-child button:last-child {
+    margin-bottom: 0;
+  }
+}

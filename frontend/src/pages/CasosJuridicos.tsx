@@ -2,6 +2,8 @@ import "./CasosJuridicos.css"
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import FormularioCasoJuridico from "../components/FormularioCasoJuridico";
+import FormularioEditarCasoJuridico from "../components/FormularioEditarCasoJuridico";
+import FormularioResponsaveisCaso from "../components/FormularioResponsaveisCaso";
 
 import {
   buscarCasosJuridicos,
@@ -9,13 +11,16 @@ import {
 } from "../services/casosJuridicosService";
 
 function CasosJuridicos() {
-    const { token } = useAuth();
+    const { token, usuario } = useAuth();
 
     const [casos, setCasos] = useState<CasoJuridico[]>([]);
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState("");
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [atualizarLista, setAtualizarLista] = useState(0);
+    const [casoEmEdicao, setCasoEmEdicao] = useState<CasoJuridico | null>(null);
+    const [casoParaResponsaveis, setCasoParaResponsaveis] =
+    useState<CasoJuridico | null>(null);
 
     useEffect(() => {
     if (!token) {
@@ -64,7 +69,11 @@ function CasosJuridicos() {
       <button
         type="button"
         className="botao-novo-caso"
-        onClick={() => setMostrarFormulario(true)}
+        onClick={() => {
+          setCasoEmEdicao(null);
+          setCasoParaResponsaveis(null);
+          setMostrarFormulario(true);
+        }}
         >
         + Novo Caso Jurídico
       </button>
@@ -78,6 +87,37 @@ function CasosJuridicos() {
                 }}
             />
         )}
+
+        {casoEmEdicao && (
+          <FormularioEditarCasoJuridico
+            key={casoEmEdicao.id}
+            caso={casoEmEdicao}
+            aoCancelar={() => setCasoEmEdicao(null)}
+            aoAtualizar={() => {
+              setCasoEmEdicao(null);
+              setAtualizarLista((valorAnterior) => valorAnterior + 1);
+            }}
+          />
+        )}
+
+        {usuario?.perfil === "ADMIN" &&
+          casoParaResponsaveis &&
+          token && (
+            <FormularioResponsaveisCaso
+              key={casoParaResponsaveis.id}
+              casoId={casoParaResponsaveis.id}
+              token={token}
+              alunoIdAtual={casoParaResponsaveis.alunoId}
+              professorIdAtual={casoParaResponsaveis.professorId}
+              aoCancelar={() => {
+                setCasoParaResponsaveis(null);
+              }}
+              aoSalvar={() => {
+                setCasoParaResponsaveis(null);
+                setAtualizarLista((valorAnterior) => valorAnterior + 1);
+              }}
+            />
+          )}
 
       <section className="casos-juridicos-lista">
             <h2>Lista de Casos Jurídicos</h2>
@@ -102,6 +142,10 @@ function CasosJuridicos() {
                         <th>Aluno</th>
                         <th>Professor</th>
                         <th>Situação</th>
+                        {(usuario?.perfil === "ADMIN" ||
+                          usuario?.perfil === "PROFESSOR") && (
+                          <th>Ações</th>
+                        )}
                         </tr>
                     </thead>
                  
@@ -127,6 +171,40 @@ function CasosJuridicos() {
                                         : "Encerrado"}
                                 </span>
                             </td>
+
+                            {(usuario?.perfil === "ADMIN" ||
+                              usuario?.perfil === "PROFESSOR") && (
+                              <td>
+                                {(usuario.perfil === "ADMIN" ||
+                                  caso.professorId === usuario.id) && (
+                                  <button
+                                    type="button"
+                                    className="botao-editar-caso"
+                                    onClick={() => {
+                                      setMostrarFormulario(false);
+                                      setCasoParaResponsaveis(null);
+                                      setCasoEmEdicao(caso);
+                                    }}
+                                  >
+                                    Editar
+                                  </button>
+                                )}
+
+                                {usuario?.perfil === "ADMIN" && (
+                                  <button
+                                    type="button"
+                                    className="botao-atribuir-responsaveis"
+                                    onClick={() => {
+                                      setMostrarFormulario(false);
+                                      setCasoEmEdicao(null);
+                                      setCasoParaResponsaveis(caso);
+                                    }}
+                                  >
+                                    Atribuir Responsáveis
+                                  </button>
+                                )}
+                              </td>
+                            )}
                             </tr>
                         ))}
                     </tbody>

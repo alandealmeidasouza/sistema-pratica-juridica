@@ -2,6 +2,8 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import { prisma } from "../prisma.ts";
+import { permitirPerfis } from "../middlewares/permissao.ts";
+import { autenticacao } from "../middlewares/autenticacao.ts";
 
 const router = Router();
 
@@ -64,5 +66,46 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
+
+router.get(
+  "/",
+  autenticacao,
+  permitirPerfis("ADMIN"),
+  async (req, res) => {
+    try {
+      const usuarios = await prisma.usuario.findMany({
+        where: {
+          ativo: true,
+          perfil: {
+            in: ["ALUNO", "PROFESSOR"]
+          }
+        },
+        select: {
+          id: true,
+          nome: true,
+          perfil: true
+        },
+        orderBy: {
+          nome: "asc"
+        }
+      });
+
+      return res.status(200).json({
+        mensagem: "Usuários encontrados com sucesso!",
+        total: usuarios.length,
+        usuarios
+      });
+
+    } catch (erro) {
+      console.error("Erro ao listar usuários:", erro);
+
+      return res.status(500).json({
+        mensagem: "Erro interno ao listar usuários."
+      });
+    }
+  }
+);
+
 
 export default router;
