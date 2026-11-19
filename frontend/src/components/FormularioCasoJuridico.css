@@ -1,0 +1,79 @@
+
+.formulario-caso-juridico {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.formulario-caso-juridico h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #1e293b;
+}
+
+.formulario-caso-juridico label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.formulario-caso-juridico input,
+.formulario-caso-juridico textarea,
+.formulario-caso-juridico select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.formulario-caso-juridico textarea {
+  resize: vertical;
+}
+
+.formulario-caso-acoes {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.formulario-caso-acoes button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.formulario-caso-acoes button[type="button"] {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.formulario-caso-acoes button[type="submit"] {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.formulario-caso-acoes button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.formulario-caso-erro {
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}

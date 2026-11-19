@@ -1,0 +1,120 @@
+.casos-juridicos-pagina {
+  padding: 24px;
+}
+
+.casos-juridicos-pagina h1 {
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.casos-juridicos-pagina > p {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.casos-juridicos-lista {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.casos-juridicos-lista h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+.casos-juridicos-tabela-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.casos-juridicos-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 750px;
+}
+
+.casos-juridicos-tabela th,
+.casos-juridicos-tabela td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.casos-juridicos-tabela th {
+  background-color: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+}
+
+.casos-juridicos-tabela td {
+  color: #0f172a;
+}
+
+.casos-juridicos-tabela tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+@media (max-width: 600px) {
+  .casos-juridicos-pagina {
+    padding: 16px;
+  }
+
+  .casos-juridicos-lista {
+    padding: 12px;
+  }
+}
+
+.caso-situacao {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.caso-situacao-aberto {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.caso-situacao-em_andamento {
+  background-color: #ffedd5;
+  color: #c2410c;
+}
+
+.caso-situacao-encerrado {
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.botao-novo-caso {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 11px 18px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.botao-novo-caso:hover {
+  background-color: #1d4ed8;
+}
+
+.botao-novo-caso:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}

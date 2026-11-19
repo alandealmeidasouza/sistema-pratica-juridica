@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Assistidos from "./pages/Assistidos";
 import Atendimentos from "./pages/Atendimentos";
+import CasosJuridicos from "./pages/CasosJuridicos";
 import LayoutPrincipal from "./layouts/LayoutPrincipal";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/assistidos" element={<Assistidos />} />
           <Route path="/atendimentos" element={<Atendimentos />} />
+          <Route path="/casos-juridicos" element={<CasosJuridicos />}/>
         </Route>
 
         {/* Redirecionamento para endereços desconhecidos */}

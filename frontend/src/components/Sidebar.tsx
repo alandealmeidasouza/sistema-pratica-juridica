@@ -56,11 +56,16 @@ function Sidebar() {
           <ClipboardList size={20} />
           <span>Atendimentos</span>
         </NavLink>
-
-        <button type="button" className="menu-item">
+    
+        <NavLink
+          to="/casos-juridicos"
+          className={({ isActive }) =>
+            `menu-item ${isActive ? "ativo" : ""}`
+          }
+        >
           <Scale size={20} />
           <span>Casos Jurídicos</span>
-        </button>
+        </NavLink>
 
         <button type="button" className="menu-item">
           <CheckSquare size={20} />

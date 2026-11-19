@@ -304,6 +304,17 @@ router.put(
         });
       }
 
+      const usuario = res.locals.usuario;
+
+      if (
+        usuario.perfil === "PROFESSOR" &&
+        casoExistente.professorId !== usuario.id
+      ) {
+        return res.status(403).json({
+          mensagem: "Você não tem permissão para editar este caso jurídico."
+        });
+      }
+
       // Atualiza o caso
       const casoAtualizado = await prisma.casoJuridico.update({
         where: { id },
