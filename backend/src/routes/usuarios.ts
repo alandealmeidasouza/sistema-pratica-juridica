@@ -1,28 +1,35 @@
 
 import { Router } from "express";
-import bcrypt from "bcrypt";
 import { prisma } from "../prisma.ts";
 import { permitirPerfis } from "../middlewares/permissao.ts";
 import { autenticacao } from "../middlewares/autenticacao.ts";
+import { gerarTokenSenha } from "../utils/tokenSenha.ts";
+import { enviarConvite } from "../services/emailService.ts";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
+router.post(
+  "/",
+  autenticacao,
+  permitirPerfis("ADMIN"),
+  async (req, res) => {
   try {
-    const { nome, email, senha } = req.body;
+    const { nome, email, perfil } = req.body ?? {};
 
     if (
       typeof nome !== "string" ||
       typeof email !== "string" ||
-      typeof senha !== "string" ||
       !nome.trim() ||
       !email.trim() ||
-      senha.length < 8
-    ) {
-      return res.status(400).json({
-        mensagem: "Informe nome, email e senha com pelo menos 8 caracteres."
-      });
-    }
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) ||
+      (perfil !== "ADMIN" &&
+      perfil !== "PROFESSOR" &&
+      perfil !== "ALUNO")
+  ) {
+    return res.status(400).json({
+      mensagem: "Informe nome, email válido e perfil válido."
+    });
+  }
 
     const emailNormalizado = email.trim().toLowerCase();
 
@@ -36,25 +43,52 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const senhaHash = await bcrypt.hash(senha, 10);
+    const { token, tokenHash } = gerarTokenSenha();
+
+    const expiraEm = new Date(
+      Date.now() + 24 * 60 * 60 * 1000
+    );
 
     const usuario = await prisma.usuario.create({
       data: {
         nome: nome.trim(),
         email: emailNormalizado,
-        senha: senhaHash,
-        perfil: "ALUNO"
+        senha: null,
+        perfil: perfil,
+        ativo: false,
+
+        tokensSenha: {
+          create: {
+            tokenHash: tokenHash,
+            tipo: "CONVITE",
+            expiraEm: expiraEm
+          }
+        }
       },
       select: {
         id: true,
         nome: true,
         email: true,
-        perfil: true
+        perfil: true,
+        ativo: true
       }
     });
 
+    try {
+      await enviarConvite(usuario.nome, usuario.email, token);
+    } catch (erro) {
+      console.error("Falha no envio do convite.");
+
+      return res.status(201).json({
+        mensagem: "Usuário cadastrado, mas não foi possível enviar o convite.",
+        conviteEnviado: false,
+        usuario
+      });
+    }
+
     return res.status(201).json({
-      mensagem: "Usuário cadastrado com sucesso!",
+      mensagem: "Usuário cadastrado e convite enviado com sucesso!",
+      conviteEnviado: true,
       usuario
     });
 

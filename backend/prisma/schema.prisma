@@ -12,7 +12,7 @@ model Usuario {
   id        String   @id @default(uuid())
   nome      String
   email     String   @unique
-  senha     String
+  senha     String?
   perfil    Perfil   @default(ALUNO)
   ativo     Boolean  @default(true)
   createdAt DateTime @default(now())
@@ -27,6 +27,9 @@ model Usuario {
 
   // Assistidos cadastrados por este usuário.
   assistidosCadastrados Assistido[] @relation("UsuarioCadastroAssistido")
+
+  
+  tokensSenha TokenSenha[]
 }
 
 enum Perfil {
@@ -158,4 +161,21 @@ model HistoricoCaso {
 
   usuarioId String?
   usuario   Usuario?     @relation(fields: [usuarioId], references: [id])
+}
+
+model TokenSenha {
+  id        String    @id @default(uuid())
+  tokenHash String    @unique
+  tipo      TipoTokenSenha
+  expiraEm  DateTime
+  usadoEm   DateTime?
+  createdAt DateTime  @default(now())
+
+  usuarioId String
+  usuario   Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+}
+
+enum TipoTokenSenha {
+  CONVITE
+  RECUPERACAO
 }

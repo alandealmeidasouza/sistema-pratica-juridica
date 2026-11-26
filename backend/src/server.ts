@@ -13,6 +13,7 @@ import prazosRoutes from "./routes/prazos.ts";
 import documentosRoutes from "./routes/documentos.ts";
 import historicoRoutes from "./routes/historico.ts";
 import dashboardRoutes from "./routes/dashboard.ts";
+import senhasRoutes from "./routes/senhas.ts";
 
 
 import { autenticacao } from "./middlewares/autenticacao.ts";
@@ -26,6 +27,7 @@ app.use(express.json());
 
 // Rotas
 app.use("/usuarios", usuariosRoutes);
+app.use("/senhas", senhasRoutes);
 app.use("/login", loginRoutes);
 app.use("/assistidos", assistidosRoutes);
 app.use("/atendimentos", atendimentosRoutes);

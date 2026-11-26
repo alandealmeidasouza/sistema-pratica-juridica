@@ -29,8 +29,8 @@ router.post("/", async (req, res) => {
       }
     });
 
-    // Verifica se o usuário existe e está ativo
-    if (!usuario || !usuario.ativo) {
+    // Verifica se o usuário existe, está ativo e possui senha
+    if (!usuario || !usuario.ativo || !usuario.senha) {
       return res.status(401).json({
         mensagem: "Email ou senha inválidos."
       });
