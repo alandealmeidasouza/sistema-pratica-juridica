@@ -1,0 +1,318 @@
+/* Página de gerenciamento */
+.pagina-gerenciamento-usuarios {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Cabeçalho */
+.pagina-gerenciamento-usuarios h1 {
+  color: #0b2559;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.pagina-gerenciamento-usuarios > p {
+  color: #64748b;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* Container da tabela */
+.tabela-usuarios-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(11, 37, 89, 0.05);
+}
+
+/* Tabela */
+.tabela-usuarios {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Cabeçalho da tabela */
+.tabela-usuarios thead {
+  background-color: #f8fafc;
+}
+
+.tabela-usuarios th {
+  padding: 18px;
+  color: #0b2559;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Dados dos usuários */
+.tabela-usuarios td {
+  padding: 18px;
+  color: #334155;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabela-usuarios tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-usuarios tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Versão mobile */
+@media (max-width: 768px) {
+  .pagina-gerenciamento-usuarios h1 {
+    font-size: 1.4rem;
+  }
+
+  .pagina-gerenciamento-usuarios > p {
+    font-size: 0.9rem;
+  }
+
+  .tabela-usuarios th,
+  .tabela-usuarios td {
+    padding: 12px;
+  }
+}
+
+/* Indicador de situação do usuário */
+.situacao-usuario {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Usuário ativo */
+.usuario-ativo {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+/* Usuário inativo */
+.usuario-inativo {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Área de filtros */
+.filtros-usuarios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* Campo de pesquisa */
+.pesquisa-usuarios {
+  width: 100%;
+  max-width: 350px;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: white;
+  color: #334155;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.pesquisa-usuarios:focus {
+  border-color: #155eef;
+}
+
+/* Pesquisa na versão mobile */
+@media (max-width: 768px) {
+  .pesquisa-usuarios {
+    max-width: 100%;
+  }
+}
+
+/* Filtro por perfil */
+.filtro-perfil-usuarios,
+.filtro-situacao-usuarios {
+  width: 100%;
+  max-width: 220px;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: white;
+  color: #334155;
+  font-size: 0.95rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filtro-perfil-usuarios:focus,
+.filtro-situacao-usuarios:focus {
+  border-color: #155eef;
+}
+
+/* Filtro na versão mobile */
+@media (max-width: 768px) {
+  .filtro-perfil-usuarios,
+  .filtro-situacao-usuarios {
+    max-width: 100%;
+  }
+}
+
+/* Botão de limpar filtros */
+.botao-limpar-filtros {
+  padding: 12px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: white;
+  color: #0b2559;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.botao-limpar-filtros:hover {
+  background-color: #eff6ff;
+  border-color: #155eef;
+}
+
+.botao-limpar-filtros:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 2px;
+}
+
+/* Botão na versão mobile */
+@media (max-width: 768px) {
+  .botao-limpar-filtros {
+    width: 100%;
+  }
+}
+
+.mensagem-cadastro {
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.mensagem-cadastro-sucesso {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.mensagem-cadastro-aviso {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.modal-usuario-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.modal-usuario {
+  width: 100%;
+  max-width: 600px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+.modal-usuario .formulario-usuario {
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+.botao-editar-usuario {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  color: #155eef;
+  border: 1px solid #155eef;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.botao-editar-usuario:hover {
+  background-color: #155eef;
+  color: #ffffff;
+}
+
+.botao-editar-usuario:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 3px;
+}
+.usuario-pendente {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+.acoes-usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.botao-ativar-usuario,
+.botao-desativar-usuario {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.botao-ativar-usuario {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+.botao-ativar-usuario:hover:not(:disabled) {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+.botao-desativar-usuario {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
+.botao-desativar-usuario:hover:not(:disabled) {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.acoes-usuario button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botao-ativar-usuario:focus-visible,
+.botao-desativar-usuario:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

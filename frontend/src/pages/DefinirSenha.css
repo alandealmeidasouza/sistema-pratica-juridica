@@ -1,0 +1,107 @@
+/* Fundo da página */
+.definir-senha-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #dbeafe, #f3f6fb);
+}
+
+/* Cartão principal */
+.definir-senha-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(11, 37, 89, 0.15);
+}
+
+/* Cabeçalho */
+.definir-senha-card h1 {
+  color: #0b2559;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.definir-senha-card > p {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Formulário */
+.definir-senha-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.definir-senha-card label {
+  color: #0b2559;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.definir-senha-card input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+
+.definir-senha-card input:focus {
+  border-color: #155eef;
+}
+
+/* Botão */
+.definir-senha-card button {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #155eef;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.definir-senha-card button:hover {
+  background-color: #104ac0;
+}
+
+.definir-senha-card button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Mensagem de erro */
+.definir-senha-card form p {
+  color: #dc2626;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Versão mobile */
+@media (max-width: 768px) {
+  .definir-senha-container {
+    padding: 16px;
+  }
+
+  .definir-senha-card {
+    padding: 30px 25px;
+  }
+
+  .definir-senha-card h1 {
+    font-size: 1.5rem;
+  }
+}

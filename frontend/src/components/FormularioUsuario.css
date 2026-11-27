@@ -1,0 +1,175 @@
+.formulario-usuario {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(11, 37, 89, 0.05);
+}
+
+.formulario-usuario h2 {
+  color: #0b2559;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.formulario-usuario > p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+}
+
+.formulario-usuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formulario-usuario .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formulario-usuario .campo label {
+  color: #0b2559;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.formulario-usuario .campo input,
+.formulario-usuario .campo select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #334155;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.formulario-usuario .campo input:focus,
+.formulario-usuario .campo select:focus {
+  border-color: #155eef;
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.1);
+}
+
+.formulario-usuario .campo select {
+  cursor: pointer;
+}
+
+.formulario-usuario .aviso-convite {
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.formulario-usuario .formulario-usuario-erro {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.formulario-usuario-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.formulario-usuario .botao-cancelar,
+.formulario-usuario .botao-cadastrar {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.formulario-usuario .botao-cancelar {
+  background-color: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.formulario-usuario .botao-cancelar:hover {
+  background-color: #f1f5f9;
+}
+
+.formulario-usuario .botao-cadastrar {
+  background-color: #155eef;
+  color: #ffffff;
+  border: 1px solid #155eef;
+}
+
+.formulario-usuario .botao-cadastrar:hover {
+  background-color: #124bcc;
+}
+
+.formulario-usuario button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .formulario-usuario {
+    max-width: 100%;
+    padding: 18px;
+  }
+
+  .formulario-usuario h2 {
+    font-size: 1.2rem;
+  }
+
+  .formulario-usuario-acoes {
+    flex-direction: column;
+  }
+
+  .formulario-usuario .botao-cancelar,
+  .formulario-usuario .botao-cadastrar {
+    width: 100%;
+  }
+}
+
+.botao-novo-usuario {
+  background-color: #155eef;
+  color: #ffffff;
+  border: 1px solid #155eef;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 25px;
+  transition: background-color 0.2s;
+}
+
+.botao-novo-usuario:hover {
+  background-color: #124bcc;
+}
+
+.botao-novo-usuario:focus-visible {
+  outline: 2px solid #155eef;
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .botao-novo-usuario {
+    width: 100%;
+  }
+}

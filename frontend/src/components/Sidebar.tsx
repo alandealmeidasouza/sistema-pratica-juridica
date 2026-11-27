@@ -83,10 +83,15 @@ function Sidebar() {
         </button>
 
         {usuario?.perfil === "ADMIN" && (
-          <button type="button" className="menu-item">
+          <NavLink
+            to="/gerenciamento-usuarios"
+            className={({ isActive }) =>
+              `menu-item ${isActive ? "ativo" : ""}`
+            }
+          >
             <UserCog size={20} />
             <span>Usuários</span>
-          </button>
+          </NavLink>
         )}
       </nav>
 
